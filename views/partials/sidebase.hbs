@@ -1,0 +1,63 @@
+
+<head>
+    <style>
+ .button_map{
+     width:70px;
+     height: 60px;
+     margin: 7px 2px;
+     float:right; 
+     border-radius: 15px;
+     background-color: #e74c3c;
+     color: #ffffff;
+    }
+
+    .button_app{
+     width:70px;
+     height: 60px;
+     margin: 7px 15px;
+     float:right; 
+     border-radius: 15px;
+     background-color: #9b59b6;
+     color:#ffffff;
+    }
+    </style>
+   
+</head>
+
+
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="leftMenu">
+    <button onclick="closeLeftMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+    <a href="/" class="w3-bar-item w3-button">Applications</a>
+    <a href="/devicepage" class="w3-bar-item w3-button">All Devices</a>
+    <a href="/devicemap" class="w3-bar-item w3-button">Device Maps</a>
+    <a href="/about" class="w3-bar-item w3-button">About</a>
+
+</div>
+
+<div class="w3-teal">
+    {{!-- <button class="w3-button w3-teal w3-xlarge w3-left" onclick="openLeftMenu()">&#9776;</button> --}}
+    <div class="w3-container">
+        <h1 style="width: 50%; float: left">(ATS) Apporio Tracking System</h1>
+        <button class = "button_app">Apps</button>
+        <button class = "button_map">Map</button>
+    </div>
+</div>
+
+
+
+<script>
+    function openLeftMenu() {
+        document.getElementById("leftMenu").style.display = "block";
+    }
+    function closeLeftMenu() {
+        document.getElementById("leftMenu").style.display = "none";
+    }
+
+    function openRightMenu() {
+        document.getElementById("rightMenu").style.display = "block";
+    }
+    function closeRightMenu() {
+        document.getElementById("rightMenu").style.display = "none";
+    }
+</script>
+

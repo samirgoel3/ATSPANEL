@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<title>Applications</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .small_text{
+            font-size:12px;
+        }
+        .button_green {
+           background-color: #4CAF50;
+           border: none;
+           color: white;
+           padding: 2px 2px;
+           text-align: center;
+           text-decoration: none;
+           display: inline-block;
+           font-size: 10px;
+           margin: 1px 1px;
+           cursor: pointer;
+           width: 70px
+        }
+        .button_blue {
+           background-color: rgb(76, 147, 175);
+           border: none;
+           color: white;
+           padding: 2px 2px;
+           text-align: center;
+           text-decoration: none;
+           display: inline-block;
+           font-size: 10px;
+           margin: 1px 1px;
+           cursor: pointer;
+           width: 70px
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+{{> sidebase}}
+
+<div class="w3-container">
+     <p style="width: 95%; float: left">This page will show all connected devices and location information related to them. </p>
+    {{!-- <button style="float:right; width: 5%">Add Merchant</button> --}}
+<table>
+     <th>Bundle Identifier</th> 
+      <th>Unique No</th> 
+      <th>Device Info</th>
+       <th>Latitude</th> 
+        <th>Longitude</th> 
+        <th>Accuracy</th>
+         <th>LastUpdated</th>
+         <th>Actions</th>
+
+        {{#each response}}
+       <tr> <td id = "a">{{this.package_name}}</td> 
+        <td>{{this.unique_no}}</td> 
+        <td>{{this.device_info}}</td> 
+        <td>{{this.latitude}}</td> 
+         <td>{{this.longitude}}</td> 
+          <td>{{this.accuracy}}</td> 
+           <td>{{this.timestamp}}</td>
+           <td>
+               <button class="button_blue" data-toggle="modal" data-target="#mModel">View On Map</button> 
+               <button class="button_green" onclick="clickAlert('{{this.device_info}}')">Test Injector</button> 
+               </td>
+            </tr>
+         {{/each }}
+        </table>
+</div>
+
+<script>
+console.log("data in html pages -------->"+response);  
+
+function clickAlert(somedata) {
+    alert("Alert! " +somedata);
+}
+</script>
+
+
+
+
+<div class="modal fade" id="mModel" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header {{this.unique_no}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+</body>
+</html>

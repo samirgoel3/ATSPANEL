@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<title>About</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+{{> sidebase}}
+
+<div class="w3-container">
+    <p>This is some infoemation that has sended from server.js class when rendering about page view</p>
+    <h5>Current year :{{currentYear}}</h5>
+
+</div>
+
+
+
+
+<script>
+    var table  ='';
+    var rows = 9 ;
+    var cols = 5 ;
+    for(var r= 0 ; r < rows ; r ++){
+        table += '<tr>';
+        for(c = 0; c< cols ; c++){
+            table += '<td>' + c + '</td>';
+        }
+        table += '</tr>';
+    }
+    document.write('<table> <th>Merchant Name</th>  <th>Merchant Name</th>  <th>Merchant Name</th>  <th>Merchant Name</th> <th>Merchant Name</th>'+ table + '</table>')
+</script>
+
+
+
+
+
+
+{{>footer}}
+
+
+</body>
+</html>
