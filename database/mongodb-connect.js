@@ -1,7 +1,7 @@
 
   const MongoClient = require('mongodb').MongoClient;
 //   const url = "mongodb://localhost:27017";
-  const url = process.env.MONGODB_URI;
+  const url = "mongodb://heroku_8t6df7pn:bcdc924jbldp2cuubsesn9ol0@ds127132.mlab.com:27132/heroku_8t6df7pn" ;
   const dbName= "TaxiData";
 
 
