@@ -2,17 +2,28 @@
 const socketIO =  require('socket.io');
 const tempSocketData = require('./TempSocketData');
 const databaseUtils = require('../database/databaseUtils');
+const EventBus = require('eventbusjs');
+const util = require('util')
+
 
 var adminIO = null ; 
 var io = null;
 var datetime = null;
 
 
+function injectorPusher(event) {
+
+    console.log("##### Socket_id:"+event.target.socket_id);
+    console.log("##### Unique_No:"+event.target.unique_no);
+    console.log("##### Data to inject:"+event.target.injector_data);
+    io.sockets.connected[event.target.socket_id].emit("greeting", "Howdy, User 1!");
+  }
+  EventBus.addEventListener("injector_pusher", injectorPusher);
+
+
 
   function createSocketWithServer(server){
     getSocketIO(server).on('connection', function (socket) {
-
-       
 
         socket.on('update_connection', function(data , ack){
             var parsed_data = JSON.parse(data);

@@ -25,7 +25,18 @@
 });
 
 
+var injector = mongoose.model('injector', {
+    injector_name:{type: String, required:true, minLength:1, trim:true},
+    injector_type:{type: String, required:true, minLength:1, trim:true},
+    unique_no:{type: String, required:true, minLength:1, trim:true},
+    client_aknowledge:{type: Boolean, required:true},
+    injector_data:{type: JSON, required:true, minLength:1}
+});
+
+
+
   module.exports = {
       Main_Devices,
-      Socket_Connection
+      Socket_Connection,
+      injector
   };

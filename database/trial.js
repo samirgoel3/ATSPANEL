@@ -15,8 +15,13 @@
 //     "provider": "fused"
 // });
 
-example.removeSocketConnection("2aebEgDUhrCOiY8HAAAC");
+// example.removeSocketConnection("2aebEgDUhrCOiY8HAAAC");
 
+example.getSocketDetailFromUniqueNo("WVGC").then((doc)=>{
+  console.log(doc);
+} , (err)=>{
+  console.log(err);
+});
 
 
 //  example.fetchFullTable();

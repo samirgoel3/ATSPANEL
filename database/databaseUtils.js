@@ -2,7 +2,11 @@
   const {MongoClient} = require('./mongoClient');
   const {Main_Devices} = require('./DBSchemas');
   const {Socket_Connection} = require('./DBSchemas');
+  const {injector} = require('./DBSchemas');
 
+
+
+  // main_device table methods
   var createNewRowInDatabase = (data) =>{
       new Main_Devices(data).save().then((doc)=>{
              console.log("ROW CREATED:" , JSON.stringify(doc, undefined, 2));
@@ -10,7 +14,6 @@
           console.log("ERROR In ROW CREATING:" , err);
       });
   }
-
 
   var fetchFullTable = () =>{
       return Main_Devices.find().then((doc)=>{
@@ -41,16 +44,13 @@
 
 
   // socket connection methods 
-
   var createNewRowinSocketConnectionTable = (data)=>{
     new Socket_Connection(data).save().then((doc)=>{
         console.log("New Devices added in socket connection table" , JSON.stringify(doc, undefined, 2));
      }, (err)=>{
         console.log("ERROR In Adding device in adding socket_connection table" , err);
     });
-
   }
-
 
   var addSocketConnection=(data)=>{
     Socket_Connection.findOneAndUpdate({"unique_no":""+data.unique_no}, data).then((doc)=>{
@@ -95,7 +95,31 @@
         return err ; 
     });
 }
+  
+  var getSocketDetailFromUniqueNo = (unique_no)=>{
+    return Socket_Connection.find({"unique_no":unique_no}).then((doc)=>{
+        if(doc.length != 0 ){return doc;}else{return null;}
+    }, (err)=>{
+        return err ; 
+    });
+  }
 
+
+
+
+
+
+
+  //inject table methods 
+  var addInjector=(data)=>{
+    return new injector(data).save().then((doc)=>{
+        console.log("New Injector added in Injector Table" , JSON.stringify(doc, undefined, 2));
+        return doc ; 
+     }, (err)=>{
+        console.log("ERROR In Adding injector in adding injector table" , err);
+        return err ;
+    });
+  }
 
 
 
@@ -107,5 +131,7 @@
        addSocketConnection,
        disconnectSocketConnection,
        updateSocketConnection,
-       fetchAllUniqueNoWithLiveConnection
+       fetchAllUniqueNoWithLiveConnection,
+       addInjector,
+       getSocketDetailFromUniqueNo
   };

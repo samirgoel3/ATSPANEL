@@ -16,6 +16,9 @@
   app.use(express.static(publicPath));
   app.use('/', adminApiRoute);
 
+
+  
+
   
   app.set('view engine', 'hbs');
   app.get('/',(req, res)=>{
