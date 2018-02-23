@@ -14,39 +14,6 @@ var io = null;
 var datetime = null;
 var mInjectorIntervals =  new HashMap();;
 
-
- 
-
-function mMethod(){
-    console.log("some callls in 5 sec ");
-}
-
-
-
-
-
-
-setInterval(clearOnGoingstach , 30000);
-
-
-
-
-function pushinjectedData(){
-    clearInterval(mHashMap.get("uni"));
-    console.log("Internal creared");
-    
-}
-
-
-
-
-
-/////////////
-
-
-
-
-
 function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
