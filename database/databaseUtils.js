@@ -28,7 +28,7 @@
           if(doc == null){
               createNewRowInDatabase(data);
           }else{
-            console.log("ROW UPDATED:"+doc);
+            // console.log("ROW UPDATED:"+doc);
           }
       }, (err)=>{
           console.log("ERROR ROW UPDATE:"+err);
@@ -120,8 +120,6 @@
         return err ;
     });
   }
-
-
 
 
   module.exports = {

@@ -16,7 +16,7 @@ function injectorPusher(event) {
     console.log("##### Socket_id:"+event.target.socket_id);
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
-    io.sockets.connected[event.target.socket_id].emit("greeting", "Howdy, User 1!");
+    io.sockets.connected[event.target.socket_id].emit("app_data", "Howdy, User 1!");
   }
   EventBus.addEventListener("injector_pusher", injectorPusher);
 
