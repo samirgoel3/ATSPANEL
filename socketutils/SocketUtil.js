@@ -64,7 +64,6 @@ function injectorPusher(event) {
                 "bearing": ""+data.location_data.bearing,
                 "altitude": ""+data.location_data.altitude,
                 "accuracy": ""+data.location_data.accuracy,
-                "timestamp": ""+data.locaton_data.timestamp,
                 "speed": ""+data.location_data.speed,
                 "provider": ""+data.location_data.provider,
 
@@ -76,6 +75,7 @@ function injectorPusher(event) {
                 "fingerprints":""+data.device_data.fingerprints,
                 "manufacture":""+data.device_data.manufacture,
                 "operating_system":""+data.device_data.operating_system,
+                "timestamp": ""+data.device_data.timestamp,
 
                 "merchant_key":""+data.app_data.merchant_key,
                 "bundle_identifier":""+data.app_data.bundle_identifier,

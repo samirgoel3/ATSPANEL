@@ -10,7 +10,6 @@
     bearing:{type: String, required:true, minLength:1, trim:true},
     altitude:{type: String, required:true, minLength:1, trim:true},
     accuracy:{type: String, required:true, minLength:1, trim:true},
-    timestamp:{type: String, required:true, minLength:1, trim:true},
     speed:{type: String, required:true, minLength:1, trim:true},
     provider:{type: String, required:true, minLength:1, trim:true},
       // device data
