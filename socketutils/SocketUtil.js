@@ -3,20 +3,65 @@ const socketIO =  require('socket.io');
 const tempSocketData = require('./TempSocketData');
 const databaseUtils = require('../database/databaseUtils');
 const EventBus = require('eventbusjs');
-const util = require('util')
+const util = require('util');
+var HashMap = require('hashmap');
+
+
 
 
 var adminIO = null ; 
 var io = null;
 var datetime = null;
+var mInjectorIntervals =  new HashMap();;
+
+
+ 
+
+function mMethod(){
+    console.log("some callls in 5 sec ");
+}
+
+
+
+
+
+
+setInterval(clearOnGoingstach , 30000);
+
+
+
+
+function pushinjectedData(){
+    clearInterval(mHashMap.get("uni"));
+    console.log("Internal creared");
+    
+}
+
+
+
+
+
+/////////////
+
+
+
 
 
 function injectorPusher(event) {
-
-    console.log("##### Socket_id:"+event.target.socket_id);
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
-    io.sockets.connected[event.target.socket_id].emit("app_data", ""+event.target.injector_data);
+
+    mHashMap.set(""+event.target.unique_no, setInterval(function(){
+        databaseUtils.getSocketDetailFromUniqueNo(""+data.unique_no).then((doc)=>{
+            if(doc==null){
+                console.log("Unable to send data on the selected unique no");
+            }else{
+                io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
+            }
+        } , (err)=>{
+            console.log("ERROR in finding the socket_id with respective unique no:"+err);
+        });
+    }, 2500));
   }
 
 
@@ -55,9 +100,6 @@ function injectorPusher(event) {
             var data = JSON.parse(msg);
             var date = ""+new Date();
             ack('received');
-
-            console.log("@@@@@@@@@@@@@" , ""+msg);
-
             databaseUtils.saveorUpdateDataToDeviceTable({
                 "latitude": ""+data.location_data.latitude,
                 "longitude": ""+data.location_data.longitude,
@@ -75,7 +117,6 @@ function injectorPusher(event) {
                 "fingerprints":""+data.device_data.fingerprints,
                 "manufacture":""+data.device_data.manufacture,
                 "operating_system":""+data.device_data.operating_system,
-                "timestamp": ""+data.device_data.timestamp,
 
                 "merchant_key":""+data.app_data.merchant_key,
                 "bundle_identifier":""+data.app_data.bundle_identifier,
@@ -90,6 +131,14 @@ function injectorPusher(event) {
            
             io.to('admin_room').emit('admin_data' , ""+msg);
 
+        });
+
+
+
+        socket.on('injector_received',function(msg , ack){
+            var data = JSON.parse(msg);
+            clearInterval(mHashMap.get(""+data.unique_no));
+            mHashMap.remove(""+data.unique_no);
         });
 
     });
