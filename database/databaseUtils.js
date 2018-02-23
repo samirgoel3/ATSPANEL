@@ -121,6 +121,14 @@
     });
   }
 
+  var getAllInjectors=()=>{
+    return injector.find().then((doc)=>{
+        return doc ; 
+    }, (err)=>{
+        return err ; 
+    });
+  }
+
 
   module.exports = {
        createNewRowInDatabase,
@@ -131,5 +139,6 @@
        updateSocketConnection,
        fetchAllUniqueNoWithLiveConnection,
        addInjector,
-       getSocketDetailFromUniqueNo
+       getSocketDetailFromUniqueNo,
+       getAllInjectors
   };

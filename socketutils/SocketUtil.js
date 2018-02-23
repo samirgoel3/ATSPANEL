@@ -18,6 +18,8 @@ function injectorPusher(event) {
     console.log("##### Data to inject:"+event.target.injector_data);
     io.sockets.connected[event.target.socket_id].emit("app_data", ""+event.target.injector_data);
   }
+
+
   EventBus.addEventListener("injector_pusher", injectorPusher);
 
 
@@ -36,9 +38,7 @@ function injectorPusher(event) {
         });
 
         socket.on('disconnect', function () {
-
             databaseUtils.disconnectSocketConnection({
-                
                 "socket_id":""+socket.id,
                 "timestamp": ""+getDate(),
                 "connected_status":false})
@@ -52,25 +52,40 @@ function injectorPusher(event) {
 
 
         socket.on('app_data', function(msg, ack){
-
             var data = JSON.parse(msg);
             var date = ""+new Date();
             ack('received');
+
             databaseUtils.saveorUpdateDataToDeviceTable({
-                "unique_no":""+data.device_data.unique_no,
-                "package_name":""+data.app_data.bundle_identifier,
-                "device_info":""+data.device_data.manufacture+","+data.device_data.model,
-                "altitude": ""+data.location_data.altitude,
                 "latitude": ""+data.location_data.latitude,
-                "bearing": ""+data.location_data.bearing,
-                "timestamp": ""+getDate(),
-                "speed": ""+data.location_data.speed,
-                "accuracy": ""+data.location_data.accuracy,
                 "longitude": ""+data.location_data.longitude,
-                "provider": ""+data.location_data.provider
+                "bearing": ""+data.location_data.bearing,
+                "altitude": ""+data.location_data.altitude,
+                "accuracy": ""+data.location_data.accuracy,
+                "timestamp": ""+data.locaton_data.timestamp,
+                "speed": ""+data.location_data.speed,
+                "provider": ""+data.location_data.provider,
+
+                "unique_no":""+data.device_data.unique_no,
+                "brand":""+data.device_data.brand,
+                "model":""+data.device_data.model,
+                "connection_strength":""+data.device_data.connection_strength,
+                "device_type":""+data.device_data.device_type,
+                "fingerprints":""+data.device_data.fingerprints,
+                "manufacture":""+data.device_data.manufacture,
+                "operating_system":""+data.device_data.operating_system,
+
+                "merchant_key":""+data.app_data.merchant_key,
+                "bundle_identifier":""+data.app_data.bundle_identifier,
+                "version_name":""+data.app_data.version_name,
+                "version_code":""+data.app_data.version_code,
+                "permission_phone_call":""+data.app_data.permission_phone_call,
+                "permission_phone_location":""+data.app_data.permission_phone_location,
+                "permission_phone_read_storage":""+data.app_data.permission_phone_storage,
+                "permission_phone_write_storage":""+data.app_data.permission_phone_storage,
+                "permission_phone_camera":""+data.app_data.permission_phone_camera,
             });
            
-
             io.to('admin_room').emit('admin_data' , ""+msg);
 
         });

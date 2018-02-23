@@ -65,6 +65,23 @@ adminApiRoute.get('/addInjector',(req, res)=>{
 });
 
 
+
+adminApiRoute.get('/getAllInjectors', (req, res) => {
+
+    databaseUtils.getAllInjectors().then((doc)=>{
+       if(doc!=null){
+           res.send(successResponse(doc));
+        }else{
+            res.send("No Injector found in Injector Table");
+        }
+  } , (err)=>{
+     res.send("error while loading the data ");
+  });
+});
+
+
+
+
 adminApiRoute.get('/upsert',(req , res)=>{
         console.log("*****->" , ""+req.query.trial);
     res.send("some data need to shoew here ");
@@ -76,8 +93,7 @@ adminApiRoute.get('/getTotalLiveDevices' , (req , res)=>{
 
 
 
-
-
+// to add an injector dor a particular device
 var sendEventForInjector = (data)=>{
     
     databaseUtils.getSocketDetailFromUniqueNo(""+data.unique_no).then((doc)=>{
@@ -92,6 +108,8 @@ var sendEventForInjector = (data)=>{
     });
     
 }
+
+
 
 
 var successResponse = (doc)=>{
