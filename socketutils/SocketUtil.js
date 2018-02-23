@@ -12,24 +12,27 @@ var HashMap = require('hashmap');
 var adminIO = null ; 
 var io = null;
 var datetime = null;
-var mInjectorIntervals =  new HashMap();;
+var mInjectorIntervals =  new HashMap();
+
+
+function insideInjector(socket_id){
+    console.log("######### yup need to work here");
+    databaseUtils.getSocketDetailFromUniqueNo(""+socket_id).then((doc)=>{
+        if(doc==null){
+            console.log("Unable to send data on the selected unique no");
+        }else{
+            io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
+        }
+    } , (err)=>{
+        console.log("ERROR in finding the socket_id with respective unique no:"+err);
+    });
+}
 
 function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
 
-    mHashMap.set(""+event.target.unique_no, setInterval(function(){
-        console.log("######### yup need to work here");
-        // databaseUtils.getSocketDetailFromUniqueNo(""+data.unique_no).then((doc)=>{
-        //     if(doc==null){
-        //         console.log("Unable to send data on the selected unique no");
-        //     }else{
-        //         io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
-        //     }
-        // } , (err)=>{
-        //     console.log("ERROR in finding the socket_id with respective unique no:"+err);
-        // });
-    }, 2500));
+    mHashMap.set(""+event.target.unique_no, setInterval(insideInjector(""+event.target.unique_no), 2500));
   }
 
 
