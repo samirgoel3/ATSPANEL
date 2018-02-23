@@ -56,6 +56,8 @@ function injectorPusher(event) {
             var date = ""+new Date();
             ack('received');
 
+            console.log("@@@@@@@@@@@@@" , ""+data);
+
             databaseUtils.saveorUpdateDataToDeviceTable({
                 "latitude": ""+data.location_data.latitude,
                 "longitude": ""+data.location_data.longitude,
