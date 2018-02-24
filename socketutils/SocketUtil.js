@@ -128,8 +128,8 @@ function injectorPusher(event) {
 
 
         socket.on('injector_received',function(msg , ack){
-            var data = JSON.parse(msg);
-            console.log("tryinh to clearing the interval for unique no "+data.unique_no);
+            // var data = JSON.parse(msg);
+            console.log("tryinh to clearing the interval for unique no "+msg.unique_no);
             // clearInterval(mInjectorIntervals.get(""+data.unique_no));
             // mInjectorIntervals.remove(""+data.unique_no);
         });
