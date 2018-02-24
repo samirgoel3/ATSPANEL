@@ -38,7 +38,7 @@ function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
     // insideInjector(event);
-    mHashMap.set(""+event.target.unique_no, setInterval(insideInjector(""+event.target.unique_no), 2500));
+    mInjectorIntervals.set(""+event.target.unique_no, setInterval(insideInjector(""+event.target.unique_no), 2500));
   }
 
 
@@ -114,8 +114,8 @@ function injectorPusher(event) {
 
         socket.on('injector_received',function(msg , ack){
             var data = JSON.parse(msg);
-            clearInterval(mHashMap.get(""+data.unique_no));
-            mHashMap.remove(""+data.unique_no);
+            clearInterval(mInjectorIntervals.get(""+data.unique_no));
+            mInjectorIntervals.remove(""+data.unique_no);
         });
 
     });
