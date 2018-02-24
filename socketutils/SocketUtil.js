@@ -31,8 +31,8 @@ function insideInjector(socket_id){
 function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
-
-    mHashMap.set(""+event.target.unique_no, setInterval(insideInjector(""+event.target.unique_no), 2500));
+    insideInjector(""+event.target.unique_no);
+    // mHashMap.set(""+event.target.unique_no, setInterval(insideInjector(""+event.target.unique_no), 2500));
   }
 
 
