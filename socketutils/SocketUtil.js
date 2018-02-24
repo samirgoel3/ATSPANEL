@@ -38,7 +38,7 @@ function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
     // insideInjector(event);
-    mInjectorIntervals.set(""+event.target.unique_no, setInterval(databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
+    setInterval(databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
         if(doc==null){
             console.log("Unable to send data on the selected unique no");
         }else{
@@ -53,7 +53,8 @@ function injectorPusher(event) {
         }
     } , (err)=>{
         console.log("ERROR in finding the socket_id with respective unique no:"+err);
-    }), 2500));
+    }), 2500);
+    // mInjectorIntervals.set(""+event.target.unique_no, );
   }
 
 
