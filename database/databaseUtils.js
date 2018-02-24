@@ -53,6 +53,7 @@
   }
 
   var addSocketConnection=(data)=>{
+      console.log("Updating uniqueno"+data.unique_no+"with socket_id:"+data.socket_id);
     Socket_Connection.findOneAndUpdate({"unique_no":""+data.unique_no}, data).then((doc)=>{
         if(doc == null){
             createNewRowinSocketConnectionTable(data);
