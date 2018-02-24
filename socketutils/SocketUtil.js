@@ -24,7 +24,7 @@ function insideInjector(unique_no){
             console.log("sending data to particular device:"+doc[0].socket_id);
             // io.sockets.connected[""+doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
             // this.io.socket.to(doc[0].socket_id).emit('hey', 'I just met you');
-            io.sockets.socket(doc[0].socket_id).emit("app_data", ""+event.target.injector_data);
+            io.socket(doc[0].socket_id).emit("app_data", ""+event.target.injector_data);
         }
     } , (err)=>{
         console.log("ERROR in finding the socket_id with respective unique no:"+err);
