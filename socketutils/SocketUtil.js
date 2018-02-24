@@ -38,26 +38,26 @@ function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
     // insideInjector(event);
-    setInterval(()=>{
-        console.log("RRRRRRRRRRRRR");
-    } , 2000);
-    setInterval(databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
-        if(doc==null){
-            console.log("Unable to send data on the selected unique no");
-        }else{
-            console.log("sending data to particular device:"+doc[0].socket_id);
-            // console.log("List of connected sockets :"+io.sockets.clients()[0]);
-            
-            try{
-                io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
-            }catch(exception){
-                console.log("Cought some exception while emiiting event to particular socketid :"+exception)
+  
+    
+    mInjectorIntervals.set(""+event.target.unique_no, setInterval(()=>{
+        databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
+            if(doc==null){
+                console.log("Unable to send data on the selected unique no");
+            }else{
+                console.log("sending data to particular device:"+doc[0].socket_id);
+                // console.log("List of connected sockets :"+io.sockets.clients()[0]);
+                
+                try{
+                    io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
+                }catch(exception){
+                    console.log("Cought some exception while emiiting event to particular socketid :"+exception)
+                }
             }
-        }
-    } , (err)=>{
-        console.log("ERROR in finding the socket_id with respective unique no:"+err);
-    }), 2500);
-    // mInjectorIntervals.set(""+event.target.unique_no, );
+        } , (err)=>{
+            console.log("ERROR in finding the socket_id with respective unique no:"+err);
+        })
+    }, 2500));
   }
 
 
