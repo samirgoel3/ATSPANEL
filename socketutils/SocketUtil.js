@@ -16,7 +16,7 @@ var mInjectorIntervals =  new HashMap();
 
 
 function insideInjector(event){
-    databaseUtils.getSocketDetailFromUniqueNo(""+event.unique_no).then((doc)=>{
+    databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
         if(doc==null){
             console.log("Unable to send data on the selected unique no");
         }else{
@@ -37,7 +37,7 @@ function insideInjector(event){
 function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
-    insideInjector(""+event.target.unique_no);
+    insideInjector(event);
     // mHashMap.set(""+event.target.unique_no, setInterval(insideInjector(""+event.target.unique_no), 2500));
   }
 
