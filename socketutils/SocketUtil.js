@@ -132,6 +132,7 @@ function injectorPusher(event) {
 
 
         socket.on('injector_received',function(msg , ack){
+            // need to work over this method therefore commiting from this thread over git
             var data = JSON.parse(msg);
             console.log("tryinh to clearing the interval for unique no "+msg);
             console.log("data after parsing:"+data);
