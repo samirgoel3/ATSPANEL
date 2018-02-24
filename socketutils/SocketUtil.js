@@ -108,9 +108,9 @@ function injectorPusher(event) {
 
 
         socket.on('injector_received',function(msg , ack){
-            var data = JSON.parse(msg);
-            clearInterval(mHashMap.get(""+data.unique_no));
-            mHashMap.remove(""+data.unique_no);
+            // var data = JSON.parse(msg);
+            // clearInterval(mHashMap.get(""+data.unique_no));
+            // mHashMap.remove(""+data.unique_no);
         });
 
     });
