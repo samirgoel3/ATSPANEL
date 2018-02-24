@@ -38,6 +38,7 @@ function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
     // insideInjector(event);
+    setInterval("RRRRRRRRRRRRR" , 2000);
     setInterval(databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
         if(doc==null){
             console.log("Unable to send data on the selected unique no");
