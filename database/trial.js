@@ -17,7 +17,7 @@
 
 // example.removeSocketConnection("2aebEgDUhrCOiY8HAAAC");
 
-example.getSocketDetailFromUniqueNo("WVGC").then((doc)=>{
+example.getSocketDetailFromUniqueNo("6627522443ba6107").then((doc)=>{
   console.log(doc);
 } , (err)=>{
   console.log(err);

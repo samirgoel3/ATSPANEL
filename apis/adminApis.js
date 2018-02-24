@@ -95,13 +95,15 @@ adminApiRoute.get('/getTotalLiveDevices' , (req , res)=>{
 
 // to add an injector dor a particular device
 var sendEventForInjector = (data)=>{
+    EventBus.dispatch("injector_pusher", data );
+
     
     databaseUtils.getSocketDetailFromUniqueNo(""+data.unique_no).then((doc)=>{
         if(doc==null){
             console.log("Unable to find the socket_id with respective unique no");
         }else{
             data.socket_id = ""+doc[0].socket_id;
-            EventBus.dispatch("injector_pusher", data );
+            
         }
     } , (err)=>{
         console.log("ERROR in finding the socket_id with respective unique no:"+err);

@@ -15,9 +15,9 @@ var datetime = null;
 var mInjectorIntervals =  new HashMap();
 
 
-function insideInjector(socket_id){
-    console.log("######### yup need to work here");
-    databaseUtils.getSocketDetailFromUniqueNo(""+socket_id).then((doc)=>{
+function insideInjector(unique_no){
+    console.log("######### yup need to work here "+unique_no);
+    databaseUtils.getSocketDetailFromUniqueNo(""+unique_no).then((doc)=>{
         if(doc==null){
             console.log("Unable to send data on the selected unique no");
         }else{

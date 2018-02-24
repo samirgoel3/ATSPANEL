@@ -79,7 +79,7 @@
   var updateSocketConnection = (data)=>{
     Socket_Connection.findOneAndUpdate({"unique_no":""+data.unique_no}, data).then((doc)=>{
         if(doc == null){
-            console.log("Founf no row to update in socket connection");
+            console.log("Found no row to update in socket connection");
         }else{
           console.log("ROW UPDATED in Socket_connection collection"+doc);
         }
