@@ -21,7 +21,8 @@ function insideInjector(unique_no){
             console.log("Unable to send data on the selected unique no");
         }else{
             console.log("sending data to particular device:"+doc[0].socket_id);
-            io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
+            console.log("List of connected sockets :"+io.sockets.clients());
+            // io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
         }
     } , (err)=>{
         console.log("ERROR in finding the socket_id with respective unique no:"+err);
