@@ -17,7 +17,7 @@ var mInjectorIntervals =  new HashMap();
 
 function insideInjector(unique_no){
     console.log("######### yup need to work here "+unique_no);
-    databaseUtils.getSocketDetailFromUniqueNo(""+unique_no).then((doc)=>{
+    databaseUtils.getSocketDetailFromUniqueNo("6627522443ba6107").then((doc)=>{
         if(doc==null){
             console.log("Unable to send data on the selected unique no");
         }else{
