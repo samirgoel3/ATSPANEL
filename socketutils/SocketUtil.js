@@ -24,6 +24,7 @@ function insideInjector(unique_no){
             console.log("sending data to particular device:"+doc[0].socket_id);
             // io.sockets.connected[""+doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
             // this.io.socket.to(doc[0].socket_id).emit('hey', 'I just met you');
+            if(io == null){console.log("variable is hell null");}else{console.log("Condifiotn is not null");}
             io.sockets(doc[0].socket_id).emit("app_data", ""+event.target.injector_data);
         }
     } , (err)=>{
