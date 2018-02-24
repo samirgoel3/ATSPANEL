@@ -38,7 +38,7 @@ function injectorPusher(event) {
     console.log("##### Unique_No:"+event.target.unique_no);
     console.log("##### Data to inject:"+event.target.injector_data);
     // insideInjector(event);
-    mInjectorIntervals.set(""+event.target.unique_no, setInterval(insideInjector(""+event.target.unique_no), 2500));
+    mInjectorIntervals.set(""+event.target.unique_no, setInterval(insideInjector(event), 2500));
   }
 
 
