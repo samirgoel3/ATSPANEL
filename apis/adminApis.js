@@ -102,8 +102,6 @@ adminApiRoute.get('/removeInjectorById' , (req , res)=>{
     } , (err)=>{
         res.send(failureResponse("error:"+err));
     });
-
-    res.send(successResponse(databaseUtils.removeSpecificInjector(req.query.injector_id)));
 });  
 
 
