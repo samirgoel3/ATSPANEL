@@ -35,11 +35,8 @@ function insideInjector(event){
 }
 
 function injectorPusher(event) {
-    console.log("##### Unique_No:"+event.target.unique_no);
-    console.log("##### Data to inject:"+event.target.injector_data);
     // insideInjector(event);
   
-    
     mInjectorIntervals.set(""+event.target.unique_no, setInterval(()=>{
         databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
             if(doc==null){
@@ -49,7 +46,7 @@ function injectorPusher(event) {
                 // console.log("List of connected sockets :"+io.sockets.clients()[0]);
                 
                 try{
-                    io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
+                    io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target);
                 }catch(exception){
                     console.log("Cought some exception while emiiting event to particular socketid :"+exception)
                 }
@@ -138,10 +135,26 @@ function injectorPusher(event) {
         socket.on('injector_received',function(msg , ack){
             // need to work over this method therefore commiting from this thread over git
             var data = JSON.parse(msg);
-            console.log("tryinh to clearing the interval for unique no "+msg);
-            console.log("data after parsing:"+data);
-            clearInterval(mInjectorIntervals.get(""+data.unique_no));
-            mInjectorIntervals.remove(""+data.unique_no);
+        
+            var inj_data_var = {
+                "injector_name":""+data.injector_name,
+                "injector_type":""+data.injector_type,
+                "unique_no": ""+data.unique_no,
+                "client_aknowledge":true,
+                "injector_data":""+data.injector_data};
+
+
+                databaseUtils.updateInjector(inj_data_var).then((doc)=>{
+                    if(doc == null){
+                        console.log("After updating the injector row it is giving us a null doc therefore interval is not cleared");
+                    }else{
+                        clearInterval(mInjectorIntervals.get(""+data.unique_no));
+                        mInjectorIntervals.remove(""+data.unique_no);
+                    }
+                } , (err)=>{
+                    console.log("Error While marking injector as true:"+err);
+                });
+
         });
 
     });

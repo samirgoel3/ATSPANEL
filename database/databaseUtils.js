@@ -147,6 +147,21 @@
     });
   }
 
+  var updateInjector = (data)=>{
+   return injector.findOneAndUpdate({"unique_no":""+data.unique_no}, data).then((doc)=>{
+        if(doc == null){
+            // console.log("Found no row to update in socket connection");
+            return null ; 
+        }else{
+        //   console.log("ROW UPDATED in Socket_connection collection"+doc);
+          return doc ; 
+        }
+    }, (err)=>{
+        // console.log("ERROR ROW UPDATE:  socket_connection collection "+err);
+        return err ; 
+    });
+  }
+
 
   module.exports = {
        createNewRowInDatabase,
@@ -160,5 +175,6 @@
        getSocketDetailFromUniqueNo,
        getAllInjectors,
        removeSpecificInjector,
-       removeAllInjectors
+       removeAllInjectors,
+       updateInjector
   };
