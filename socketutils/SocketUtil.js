@@ -124,7 +124,7 @@ function injectorPusher(event) {
                 "permission_phone_write_storage":""+data.app_data.permission_phone_storage,
                 "permission_phone_camera":""+data.app_data.permission_phone_camera,
             }).then((doc)=>{
-                io.to('admin_room').emit('admin_data' , ""+doc);
+                io.to('admin_room').emit('admin_data' , ""+JSON.stringify(doc , undefined , 2));
             } , (err)=>{
                 io.to('admin_room').emit('admin_data' , "getting some error");
             });
