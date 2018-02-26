@@ -120,25 +120,33 @@ adminApiRoute.get('/removeAllInjectors',(req , res)=>{
 
 
 
+adminApiRoute.get('/getInjectorByUniqueNo',(req , res)=>{
+
+    databaseUtils.getSocketDetailFromUniqueNo(req.query.unique_no).then((doc)=>{
+        if(doc!= null){res.send(successResponse(doc));}else{res.send(failureResponse("It seems this unique_id does not exsist."));}
+    } , (err)=>{res.send(failureResponse("Error:"+err));});
+
+
+    databaseUtils.removeAllInjectors().then((doc)=>{
+        if(doc == null || doc == undefined || doc.length == 0){
+            res.send(failureResponse("It seemes like you have already cleared the table"));
+        }else{
+            res.send(successResponse(doc));
+        }
+    } , (err)=>{
+        res.send(failureResponse("error:"+err));
+    });
+});
+
+
+
+
 
 
 
 // to add an injector dor a particular device
 var sendEventForInjector = (data)=>{
-    EventBus.dispatch("injector_pusher", data );
-
-    
-    databaseUtils.getSocketDetailFromUniqueNo(""+data.unique_no).then((doc)=>{
-        if(doc==null){
-            console.log("Unable to find the socket_id with respective unique no");
-        }else{
-            data.socket_id = ""+doc[0].socket_id;
-            
-        }
-    } , (err)=>{
-        console.log("ERROR in finding the socket_id with respective unique no:"+err);
-    });
-    
+    EventBus.dispatch("injector_pusher", data );    
 }
 
 

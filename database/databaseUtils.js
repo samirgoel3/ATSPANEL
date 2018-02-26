@@ -162,6 +162,14 @@
     });
   }
 
+  var getInjectorByParticularUniqueNo = (unique_no)=>{
+    return injector.find({"unique_no":unique_no}).then((doc)=>{
+        if(doc.length != 0 ){return doc;}else{return null;}
+    }, (err)=>{
+        return err ; 
+    });
+  }
+
 
   module.exports = {
        createNewRowInDatabase,
@@ -176,5 +184,6 @@
        getAllInjectors,
        removeSpecificInjector,
        removeAllInjectors,
-       updateInjector
+       updateInjector,
+       getInjectorByParticularUniqueNo
   };
