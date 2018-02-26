@@ -124,10 +124,10 @@ adminApiRoute.get('/getInjectorByUniqueNo',(req , res)=>{
 
     console.log("asking for this uniqu no :"+req.query.unique_no);
     databaseUtils.getSocketDetailFromUniqueNo(""+req.query.unique_no).then((doc)=>{
-        if(doc!= null){
-            res.send(successResponse(doc));
+        if(doc == null){
+            res.send(failureResponse("It seems this unique_id does not exsist.:"+req.query.unique_no));
         }else{
-            res.send(failureResponse("It seems this unique_id does not exsist."));
+            res.send(successResponse(doc));
         }
     } , (err)=>{res.send(failureResponse("Error:"+err));});
 });
