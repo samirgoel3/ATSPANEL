@@ -136,8 +136,8 @@ function injectorPusher(event) {
             var data = JSON.parse(msg);
             console.log("tryinh to clearing the interval for unique no "+msg);
             console.log("data after parsing:"+data);
-            // clearInterval(mInjectorIntervals.get(""+data.unique_no));
-            // mInjectorIntervals.remove(""+data.unique_no);
+            clearInterval(mInjectorIntervals.get(""+data.unique_no));
+            mInjectorIntervals.remove(""+data.unique_no);
         });
 
     });
