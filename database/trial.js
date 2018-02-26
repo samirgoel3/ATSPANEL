@@ -17,10 +17,25 @@
 
 // example.removeSocketConnection("2aebEgDUhrCOiY8HAAAC");
 
-example.getSocketDetailFromUniqueNo("6627522443ba6107").then((doc)=>{
-  console.log(doc);
+// example.getSocketDetailFromUniqueNo("6627522443ba6107").then((doc)=>{
+//   console.log(doc);
+// } , (err)=>{
+//   console.log(err);
+// });
+
+
+// example.removeSpecificInjector("5a916bc89b89130014a55b3f");
+
+// example.removeSpecificInjector("5a93a0653df48700145c68f8").then((doc)=>{
+//   console.log("REMOVED:"+doc);
+// } , (err)=>{
+//   console.log("ERROR in REMOVING:"+err);
+// });
+
+example.removeAllInjectors().then((doc)=>{
+  console.log("REMOVED DATA:"+doc.length);
 } , (err)=>{
-  console.log(err);
+  console.log("ERROR REMOVED:"+err);
 });
 
 

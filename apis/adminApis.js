@@ -91,6 +91,24 @@ adminApiRoute.get('/getTotalLiveDevices' , (req , res)=>{
     res.send("Total no of connected devices "+tempSocketData.getHahMapObject().size);
 });  
 
+adminApiRoute.get('/removeInjectorById' , (req , res)=>{
+
+    databaseUtils.removeSpecificInjector(""+req.query.injector_id).then((doc)=>{
+        if(doc != null){
+            res.send(successResponse(doc));
+        }else{
+            res.send(failureResponse("Found no item according to submitted injector_id"));
+        }
+    } , (err)=>{
+        res.send(failureResponse("error:"+err));
+    });
+
+    res.send(successResponse(databaseUtils.removeSpecificInjector(req.query.injector_id)));
+});  
+
+
+
+
 
 
 // to add an injector dor a particular device
@@ -110,7 +128,6 @@ var sendEventForInjector = (data)=>{
     });
     
 }
-
 
 
 

@@ -130,6 +130,23 @@
     });
   }
 
+  var removeSpecificInjector = (id)=>{  // this method will return null in promise if there is no data according to specific id
+    return injector.findByIdAndRemove(id).then((doc)=>{
+        return doc ; 
+    } , (err)=>{
+          return err;
+    });
+  }
+
+  var removeAllInjectors = ()=>{
+
+    return injector.remove({}).then((doc)=>{
+        return doc ; 
+    } ,(err)=>{
+        return err ; 
+    });
+  }
+
 
   module.exports = {
        createNewRowInDatabase,
@@ -141,5 +158,7 @@
        fetchAllUniqueNoWithLiveConnection,
        addInjector,
        getSocketDetailFromUniqueNo,
-       getAllInjectors
+       getAllInjectors,
+       removeSpecificInjector,
+       removeAllInjectors
   };
