@@ -8,10 +8,10 @@
 
   // main_device table methods
   var createNewRowInDatabase = (data) =>{
-      new Main_Devices(data).save().then((doc)=>{
-             console.log("ROW CREATED:" , JSON.stringify(doc, undefined, 2));
+      return new Main_Devices(data).save().then((doc)=>{
+             return doc ;
       }, (err)=>{
-          console.log("ERROR In ROW CREATING:" , err);
+          return err ; 
       });
   }
 
@@ -24,14 +24,14 @@
   }
 
   var saveorUpdateDataToDeviceTable = (data)=>{
-       Main_Devices.findOneAndUpdate({"unique_no":""+data.unique_no}, data).then((doc)=>{
+      return  Main_Devices.findOneAndUpdate({"unique_no":""+data.unique_no}, data).then((doc)=>{
           if(doc == null){
-              createNewRowInDatabase(data);
+              return createNewRowInDatabase(data);
           }else{
-            // console.log("ROW UPDATED:"+doc);
+            return doc ; 
           }
       }, (err)=>{
-          console.log("ERROR ROW UPDATE:"+err);
+          return err ; 
       });
   }
 

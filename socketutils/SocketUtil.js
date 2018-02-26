@@ -123,9 +123,13 @@ function injectorPusher(event) {
                 "permission_phone_read_storage":""+data.app_data.permission_phone_storage,
                 "permission_phone_write_storage":""+data.app_data.permission_phone_storage,
                 "permission_phone_camera":""+data.app_data.permission_phone_camera,
+            }).then((doc)=>{
+                io.to('admin_room').emit('admin_data' , ""+doc);
+            } , (err)=>{
+                io.to('admin_room').emit('admin_data' , "getting some error");
             });
            
-            io.to('admin_room').emit('admin_data' , ""+msg);
+            
 
         });
 
