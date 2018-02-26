@@ -163,7 +163,7 @@
   }
 
   var getInjectorByParticularUniqueNo = (unique_no)=>{
-    return injector.find({"unique_no":unique_no}).then((doc)=>{
+    return injector.find({"unique_no":""+unique_no}).then((doc)=>{
         if(doc.length != 0 ){return doc;}else{return null;}
     }, (err)=>{
         return err ; 

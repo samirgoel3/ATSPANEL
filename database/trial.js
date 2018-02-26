@@ -32,11 +32,17 @@
 //   console.log("ERROR in REMOVING:"+err);
 // });
 
-example.removeAllInjectors().then((doc)=>{
-  console.log("REMOVED DATA:"+doc.length);
-} , (err)=>{
-  console.log("ERROR REMOVED:"+err);
-});
+// example.removeAllInjectors().then((doc)=>{
+//   console.log("REMOVED DATA:"+doc.length);
+// } , (err)=>{
+//   console.log("ERROR REMOVED:"+err);
+// });
+
+  example.getInjectorByParticularUniqueNo().then((doc)=>{
+    console.log("@@@@@@@@@@"+doc);
+  } , (err)=>{
+    console.log("@@@@@@@@@@@@"+err);
+  });
 
 
 //  example.fetchFullTable();
