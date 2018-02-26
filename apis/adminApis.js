@@ -125,17 +125,6 @@ adminApiRoute.get('/getInjectorByUniqueNo',(req , res)=>{
     databaseUtils.getSocketDetailFromUniqueNo(req.query.unique_no).then((doc)=>{
         if(doc!= null){res.send(successResponse(doc));}else{res.send(failureResponse("It seems this unique_id does not exsist."));}
     } , (err)=>{res.send(failureResponse("Error:"+err));});
-
-
-    databaseUtils.removeAllInjectors().then((doc)=>{
-        if(doc == null || doc == undefined || doc.length == 0){
-            res.send(failureResponse("It seemes like you have already cleared the table"));
-        }else{
-            res.send(successResponse(doc));
-        }
-    } , (err)=>{
-        res.send(failureResponse("error:"+err));
-    });
 });
 
 
