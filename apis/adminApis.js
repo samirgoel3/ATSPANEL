@@ -122,7 +122,7 @@ adminApiRoute.get('/removeAllInjectors',(req , res)=>{
 
 adminApiRoute.get('/getInjectorByUniqueNo',(req , res)=>{
    
-    databaseUtils.getInjectorByParticularUniqueNo("66275224ffff43ba6107").then((doc)=>{
+    databaseUtils.getInjectorByParticularUniqueNo(""+req.query.unique_no).then((doc)=>{
         if(doc == null){
             res.send(failureResponse("It seems this unique_id does not exsist.:"+req.query.unique_no));
         }else{
