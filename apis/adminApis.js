@@ -106,7 +106,7 @@ adminApiRoute.get('/removeInjectorById' , (req , res)=>{
 
 
 
-adminApiRoute.get('./removeAllInjectors',(req , res)=>{
+adminApiRoute.get('/removeAllInjectors',(req , res)=>{
     databaseUtils.removeAllInjectors().then((doc)=>{
         if(doc == null || doc == undefined || doc.length == 0){
             res.send(failureResponse("It seemes like you have already cleared the table"));
