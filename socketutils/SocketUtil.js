@@ -141,7 +141,8 @@ function injectorPusher(event) {
                 "injector_type":""+data.injector_type,
                 "unique_no": ""+data.unique_no,
                 "client_aknowledge":true,
-                "injector_data":""+data.injector_data};
+                "injector_data":""+data.injector_data,
+                "_id":""+data.injector_id};
 
 
                 databaseUtils.updateInjector(inj_data_var).then((doc)=>{

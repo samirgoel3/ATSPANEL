@@ -148,7 +148,7 @@
   }
 
   var updateInjector = (data)=>{
-   return injector.findOneAndUpdate({"unique_no":""+data.unique_no}, data).then((doc)=>{
+   return injector.findOneAndUpdate({"_id":""+data._id}, data).then((doc)=>{
         if(doc == null){
             // console.log("Found no row to update in socket connection");
             return null ; 
