@@ -46,7 +46,7 @@ function injectorPusher(event) {
                 // console.log("List of connected sockets :"+io.sockets.clients()[0]);
                 
                 try{
-                    io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target);
+                    io.sockets.connected[doc[0].socket_id].emit("app_data", ""+ JSON.stringify(event.target , undefined, 2));
                 }catch(exception){
                     console.log("Cought some exception while emiiting event to particular socketid :"+exception)
                 }
