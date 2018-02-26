@@ -38,7 +38,7 @@
 //   console.log("ERROR REMOVED:"+err);
 // });
 
-  example.getInjectorByParticularUniqueNo().then((doc)=>{
+  example.getInjectorByParticularUniqueNo("66275224ffff43ba6107").then((doc)=>{
     console.log("@@@@@@@@@@"+doc);
   } , (err)=>{
     console.log("@@@@@@@@@@@@"+err);

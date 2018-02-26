@@ -123,7 +123,7 @@ adminApiRoute.get('/removeAllInjectors',(req , res)=>{
 adminApiRoute.get('/getInjectorByUniqueNo',(req , res)=>{
 
     console.log("asking for this uniqu no :"+req.query.unique_no);
-    databaseUtils.getSocketDetailFromUniqueNo(req.query.unique_no).then((doc)=>{
+    databaseUtils.getSocketDetailFromUniqueNo(""+req.query.unique_no).then((doc)=>{
         if(doc!= null){
             res.send(successResponse(doc));
         }else{
