@@ -162,8 +162,17 @@
     });
   }
 
+  var viewInjectorById = (id)=>{
+    return injector.findById(id).then((doc)=>{
+        if(doc != null ){return doc;}else{return null ;}
+    }, (err)=>{
+        return err ; 
+    });
+  }
+
   var getInjectorByParticularUniqueNo = (unique_no)=>{
     return injector.find({"unique_no":""+unique_no}).then((doc)=>{
+        console.log();
         if(doc.length != 0 ){return doc;}else{return null ;}
     }, (err)=>{
         return err ; 
@@ -171,7 +180,7 @@
   }
 
   var getAllUnacknowledgedInjectors= ()=>{
-    return injector.find({ "client_aknowledge": false,}).then((doc)=>{
+    return injector.find({ "client_aknowledge": false}).then((doc)=>{
         if(doc.length != 0 ){return doc;}else{return null ;}
     }, (err)=>{
         return err ; 
@@ -194,5 +203,6 @@
        removeAllInjectors,
        updateInjector,
        getInjectorByParticularUniqueNo,
-       getAllUnacknowledgedInjectors
+       getAllUnacknowledgedInjectors,
+       viewInjectorById
   };

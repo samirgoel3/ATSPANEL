@@ -44,10 +44,17 @@
   //   console.log("@@@@@@@@@@@@"+err);
   // });
 
-  example.getAllUnacknowledgedInjectors().then((doc)=>{
-    console.log("@@@@@@@@@@:"+JSON.stringify(doc, undefined , 2));
+  // example.getAllUnacknowledgedInjectors().then((doc)=>{
+  //   console.log("@@@@@@@@@@:"+JSON.stringify(doc, undefined , 2));
+  // } , (err)=>{
+  //   console.log("########:"+err);
+  // });
+
+
+  example.viewInjectorById("5a95318dcf917400147f5f5968ff").then((doc)=>{
+    console.log("Finding one by ID:"+doc);
   } , (err)=>{
-    console.log("########:"+err);
+    console.log("Error:"+err);
   });
 
 

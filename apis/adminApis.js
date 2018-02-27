@@ -133,6 +133,14 @@ adminApiRoute.get('/getInjectorByUniqueNo',(req , res)=>{
       });
 });
 
+adminApiRoute.get('/getInjectorById',(req, res)=>{
+    databaseUtils.viewInjectorById(req.query.injector_id).then((doc)=>{
+        if(doc != null){res.send(successResponse(doc));}else{res.send(failureResponse("Found no data with respective Injector id"));}
+    } , (err)=>{
+        response.send(failureResponse("error:"+err));
+    });
+});
+
 
 
 
