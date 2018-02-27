@@ -4,60 +4,65 @@ const tempSocketData = require('./TempSocketData');
 const databaseUtils = require('../database/databaseUtils');
 const EventBus = require('eventbusjs');
 const util = require('util');
-var HashMap = require('hashmap');
-
 
 
 
 var adminIO = null ; 
 var io = null;
 var datetime = null;
-var mInjectorIntervals =  new HashMap();
 
 
-function insideInjector(event){
-    databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
+function injectorPusher(event) {
+    // insideInjector(event);
+    emitDataForUnAcknowledged(""+event.target);
+
+  }
+
+
+
+  function emitDataForUnAcknowledged(data){
+    databaseUtils.getSocketDetailFromUniqueNo(data.unique_no).then((doc)=>{
         if(doc==null){
             console.log("Unable to send data on the selected unique no");
         }else{
-            console.log("sending data to particular device:"+doc[0].socket_id);
-            // console.log("List of connected sockets :"+io.sockets.clients()[0]);
-            
             try{
-                io.sockets.connected[doc[0].socket_id].emit("app_data", ""+event.target.injector_data);
+                // io.sockets.connected[doc[0].socket_id].emit("app_data", ""+ JSON.stringify(data , undefined, 2));
+                io.to(doc[0].socket_id).emit('app_data', ""+ JSON.stringify(data , undefined, 2));
             }catch(exception){
-                console.log("Cought some exception while emiiting event to particular socketid :"+exception)
+                console.log("caught some exception while emiiting event to particular socketid :"+exception)
             }
         }
     } , (err)=>{
         console.log("ERROR in finding the socket_id with respective unique no:"+err);
-    });
-}
-
-function injectorPusher(event) {
-    // insideInjector(event);
-  
-    mInjectorIntervals.set(""+event.target.unique_no, setInterval(()=>{
-        databaseUtils.getSocketDetailFromUniqueNo(""+event.target.unique_no).then((doc)=>{
-            if(doc==null){
-                console.log("Unable to send data on the selected unique no");
-            }else{
-                console.log("sending data to particular device:"+doc[0].socket_id);
-                // console.log("List of connected sockets :"+io.sockets.clients()[0]);
-                
-                try{
-                    io.sockets.connected[doc[0].socket_id].emit("app_data", ""+ JSON.stringify(event.target , undefined, 2));
-                }catch(exception){
-                    console.log("Cought some exception while emiiting event to particular socketid :"+exception)
-                }
-            }
-        } , (err)=>{
-            console.log("ERROR in finding the socket_id with respective unique no:"+err);
-        })
-    }, 2500));
+    })
   }
 
 
+  setInterval(()=>{
+      databaseUtils.getAllUnacknowledgedInjectors().then((doc)=>{
+          try{
+            if(doc.length != 0 || doc != null) {
+                console.log("Pending Injector:"+doc.length);
+                for (var i = 0, len = doc.length; i < len; i++) {
+                  emitDataForUnAcknowledged(doc[i]);
+                }
+            }
+          }catch(exception){// exception to null fetch IGNORE FOR NOW
+          };    
+      } ,(err)=>{
+          console.log("ERROR in finding the unacknowledged injectors:"+err)
+      });
+  }, 3000)
+
+
+
+
+
+
+
+
+
+  
   EventBus.addEventListener("injector_pusher", injectorPusher);
 
 

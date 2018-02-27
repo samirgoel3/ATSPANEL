@@ -38,10 +38,16 @@
 //   console.log("ERROR REMOVED:"+err);
 // });
 
-  example.getInjectorByParticularUniqueNo("66275224ffff43ba6107").then((doc)=>{
-    console.log("@@@@@@@@@@"+doc);
+  // example.getInjectorByParticularUniqueNo("66275224ffff43ba6107").then((doc)=>{
+  //   console.log("@@@@@@@@@@"+doc);
+  // } , (err)=>{
+  //   console.log("@@@@@@@@@@@@"+err);
+  // });
+
+  example.getAllUnacknowledgedInjectors().then((doc)=>{
+    console.log("@@@@@@@@@@:"+JSON.stringify(doc, undefined , 2));
   } , (err)=>{
-    console.log("@@@@@@@@@@@@"+err);
+    console.log("########:"+err);
   });
 
 

@@ -170,6 +170,14 @@
     });
   }
 
+  var getAllUnacknowledgedInjectors= ()=>{
+    return injector.find({ "client_aknowledge": false,}).then((doc)=>{
+        if(doc.length != 0 ){return doc;}else{return null ;}
+    }, (err)=>{
+        return err ; 
+    });
+  }
+
 
   module.exports = {
        createNewRowInDatabase,
@@ -185,5 +193,6 @@
        removeSpecificInjector,
        removeAllInjectors,
        updateInjector,
-       getInjectorByParticularUniqueNo
+       getInjectorByParticularUniqueNo,
+       getAllUnacknowledgedInjectors
   };

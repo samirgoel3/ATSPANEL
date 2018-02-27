@@ -131,8 +131,6 @@ adminApiRoute.get('/getInjectorByUniqueNo',(req , res)=>{
       } , (err)=>{
         res.send(failureResponse("Error:"+err));
       });
-
-
 });
 
 
