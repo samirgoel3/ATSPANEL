@@ -30,7 +30,8 @@
      permission_phone_location:{type: String, required:true, minLength:1, trim:true},
      permission_phone_read_storage:{type: String, required:true, minLength:1, trim:true},
      permission_phone_write_storage:{type: String, required:true, minLength:1, trim:true},
-     permission_phone_camera:{type: String, required:true, minLength:1, trim:true}
+     permission_phone_camera:{type: String, required:true, minLength:1, trim:true},
+     app_running_status:{type: String, required:true, minLength:1, trim:true}
   });
 
   var Socket_Connection = mongoose.model('socket_connection', {
