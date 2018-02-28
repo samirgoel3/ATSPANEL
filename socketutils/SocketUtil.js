@@ -21,6 +21,7 @@ function injectorPusher(event) {
 
 
   function emitDataForUnAcknowledged(data){
+      console.log("SocketUtil" , "Server tryinh to push injector over this unique no:"+data.unique_no);
     databaseUtils.getSocketDetailFromUniqueNo(data.unique_no).then((doc)=>{
         if(doc==null){
             console.log("Unable to send data on the selected unique no");
