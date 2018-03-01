@@ -98,7 +98,7 @@ function injectorPusher(event) {
         socket.on('app_data', function(msg, ack){
             var data = JSON.parse(msg);
             var date = ""+new Date();
-            console.log("********************************app running status",""+msg.app_data.app_running_status);
+            console.log("********************************app running status",""+data.app_data.app_running_status);
             ack('received');
             databaseUtils.saveorUpdateDataToDeviceTable({
                 "latitude": ""+data.location_data.latitude,
