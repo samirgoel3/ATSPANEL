@@ -51,11 +51,11 @@
   // });
 
 
-  example.viewInjectorById("5a95318dcf917400147f5f5968ff").then((doc)=>{
-    console.log("Finding one by ID:"+doc);
-  } , (err)=>{
-    console.log("Error:"+err);
-  });
+  // example.viewInjectorById("5a95318dcf917400147f5f5968ff").then((doc)=>{
+  //   console.log("Finding one by ID:"+doc);
+  // } , (err)=>{
+  //   console.log("Error:"+err);
+  // });
 
 
 //  example.fetchFullTable();
