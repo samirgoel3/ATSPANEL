@@ -4,7 +4,7 @@ const tempSocketData = require('./TempSocketData');
 const databaseUtils = require('../database/databaseUtils');
 const EventBus = require('eventbusjs');
 const util = require('util');
-
+const redis = require('redis');
 
 
 var adminIO = null ; 
@@ -70,6 +70,8 @@ function injectorPusher(event) {
 
   function createSocketWithServer(server){
     getSocketIO(server).on('connection', function (socket) {
+
+        console.log("some new socket is connected :"+socket._id);
 
         socket.on('update_connection', function(data , ack){
             var parsed_data = JSON.parse(data);
