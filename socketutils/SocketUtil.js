@@ -72,6 +72,16 @@ function injectorPusher(event) {
     getSocketIO(server).on('connection', function (socket) {
 
         console.log("some new socket is connected :"+socket._id);
+        
+      var redisClient = redis.createClient();
+      redisClient.subscribe('message');
+ 
+      redisClient.on("message", function(channel, message) {
+        console.log("mew message in queue "+ message + "channel");
+            socket.emit(channel, message);
+        });
+
+
 
         socket.on('update_connection', function(data , ack){
             var parsed_data = JSON.parse(data);
@@ -84,6 +94,7 @@ function injectorPusher(event) {
         });
 
         socket.on('disconnect', function () {
+            redisClient.quit();
             databaseUtils.disconnectSocketConnection({
                 "socket_id":""+socket.id,
                 "timestamp": ""+getDate(),

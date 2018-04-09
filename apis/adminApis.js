@@ -24,6 +24,27 @@ adminApiRoute.get('/getAllDevices', (req, res) => {
 });
 
 
+adminApiRoute.get('/vishal', (req, res)=>{
+    res.send({
+        "result": 1,
+        "message": "Login successfully!",
+        "response": {
+          "user_id": 234,
+          "user_first_name": "vishal",
+          "user_last_name": "garg",
+          "user_email": "vishal@apporio.com",
+          "user_phone": "9898776756",
+          "user_image": "http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-business-bear.png",
+          "country_code_id": 2,
+          "country_code_value": "91",
+          "country_code_name": "India",
+          "login_type": 1,
+          "session_token": "223jdiuijrekiu78i_pp09_AASDzzr4+9090"
+        }
+      });
+});
+
+
 
 // this wil all unique number whos connection status is tru ie these are live
 adminApiRoute.get('/getAllLiveConnections', (req, res) => {
